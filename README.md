@@ -46,9 +46,16 @@ Let us get started!
 ### Step 1 — Prepare a Web Server'
 
 1. Launch an EC2 instance that will serve as "Web Server". Create 3 volumes in the same AZ as your Web Server EC2, each of 10 GiB and attach them to the "Web Server"
-![Screenshot (94)](https://user-images.githubusercontent.com/111396874/227520365-46e28012-b38e-429a-a180-b2ee505fa0c2.png)
+![Screenshot (94)](https://user-images.githubusercontent.com/111396874/227520780-26e15786-726a-48c0-9e91-7dc0a8bffe77.png)
+![Screenshot (95)](https://user-images.githubusercontent.com/111396874/227520810-08e144f3-0d3c-499e-8209-9652ddb10ed0.png)
 
-![Screenshot (95)](https://user-images.githubusercontent.com/111396874/227520288-e8354e10-f5d8-4fa8-9f9c-75b9c3a6e099.png)
+2. Open up the Linux terminal to begin configuration
+3. Use ``lsblk`` command to inspect what block devices are attached to the server. Notice names of your newly created devices. All devices in Linux reside in /dev/ directory. Inspect it with ls /dev/ and make sure you see all 3 newly created block devices there – their names will likely be xvdf, xvdh, xvdg.
 
-  
+4. Use ``df -h`` command to see all mounts and free space on your server
+5. Use ``gdisk`` utility to create a single partition on each of the 3 disks
+
+
+
+
   
