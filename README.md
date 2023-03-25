@@ -51,6 +51,7 @@ Let us get started!
 
 2. Open up the Linux terminal to begin configuration
 3. Use ``lsblk`` command to inspect what block devices are attached to the server. Notice names of your newly created devices. All devices in Linux reside in /dev/ directory. Inspect it with ls /dev/ and make sure you see all 3 newly created block devices there – their names will likely be xvdf, xvdh, xvdg.
+  
 
 4. Use ``df -h`` command to see all mounts and free space on your server
 5. Use ``gdisk`` utility to create a single partition on each of the 3 disks
