@@ -229,9 +229,25 @@ sudo mysql -u myuser -p -h <DB-Server-Private-IP-address>
 
 3. Change permissions and configuration so Apache could use WordPress:
 
+Below is a method of configuration of apache for wordpress
+
+* You need to configure Apache to serve WordPress. You can create a new virtual host file for WordPress in the /etc/httpd/conf.d/ directory. Here's an example configuration file:
+```
+<VirtualHost *:80>
+  ServerName example.com
+  DocumentRoot /var/www/html/wordpress
+  <Directory /var/www/html/wordpress>
+    AllowOverride All
+    Require all granted
+  </Directory>
+</VirtualHost>
+```
+
 4. Enable TCP port 80 in Inbound Rules configuration for your Web Server EC2 (enable from everywhere 0.0.0.0/0 or from your workstation’s IP)
 
 5. Try to access from your browser the link to your WordPress ``http://<Web-Server-Public-IP-Address>/wordpress/``
+
+
 
 
 
