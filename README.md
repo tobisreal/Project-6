@@ -229,23 +229,51 @@ sudo mysql -u myuser -p -h <DB-Server-Private-IP-address>
 
 3. Change permissions and configuration so Apache could use WordPress:
 
-Below is a method of configuration of apache for wordpress
+Below is a method of configuration of Apache for wordpress
 
-* You need to configure Apache to serve WordPress. You can create a new virtual host file for WordPress in the /etc/httpd/conf.d/ directory. Here's an example configuration file:
+* You need to configure Apache to serve WordPress. You can create a new virtual host file for WordPress in the ``/etc/httpd/conf.d/`` directory. Here's an of example configuration file:
+```
+sudo vi /etc/httpd/conf.d/wordpress.conf
+```
 ```
 <VirtualHost *:80>
   ServerName example.com
-  DocumentRoot /var/www/html/wordpress
-  <Directory /var/www/html/wordpress>
+  DocumentRoot /var/www/html/
+  <Directory /var/www/html/>
     AllowOverride All
     Require all granted
   </Directory>
 </VirtualHost>
 ```
+* Change permissions: You need to change the permissions of the WordPress files and directories so that Apache can read and write them. You can do this by running the following commands:
+```
+sudo chmod -R 755 /var/www/html/wordpress
+```
+* Restart Apache: After making the changes, you need to restart Apache to apply the new configuration:
+```
+sudo systemctl restart httpd
+```
+![Screenshot (109)](https://user-images.githubusercontent.com/111396874/227745751-e469b2e4-9689-4313-bea2-3f56954a7905.png)
 
 4. Enable TCP port 80 in Inbound Rules configuration for your Web Server EC2 (enable from everywhere 0.0.0.0/0 or from your workstation’s IP)
+5. Configure the ``wp-config.php`` file so that wordpress can conncet to the database without failing. Make sure that the **username**, **password**, **database name**, and **database host** in your **wp-config.php** file corresponds with database you created. You can find these details in the MySQL database that you created earlier.
+```
+sudo vi /var/www/html/wordpress/wp-config.php
+```
 
-5. Try to access from your browser the link to your WordPress ``http://<Web-Server-Public-IP-Address>/wordpress/``
+Here is an example:
+![Screenshot (114)](https://user-images.githubusercontent.com/111396874/227746007-07c85603-5db5-45a6-b834-5b15cc40e463.png)
+
+6. Try to access from your browser the link to your WordPress ``http://<Web-Server-Public-IP-Address>/wordpress/``
+
+If you see this message – it means your WordPress has successfully connected to your remote MySQL database
+![Screenshot (110)](https://user-images.githubusercontent.com/111396874/227746259-7dafd29e-fb7d-4b42-b537-68121ffb47f0.png)
+![Screenshot (111)](https://user-images.githubusercontent.com/111396874/227746271-c1b9a189-feee-4c2e-b32b-520b2186f36c.png)
+
+**CONGRATULATIONS!**
+You have learned how to configure Linux storage susbystem and have also deployed a full-scale Web Solution using WordPress CMS and MySQL RDBMS
+
+
 
 
 
